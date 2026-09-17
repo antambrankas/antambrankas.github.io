@@ -19,6 +19,14 @@ export function formatCurrency(value, currency = 'IDR') {
     .replace(/\u00a0/g, ' ');
 }
 
+export function formatPricePerUnit(value, currency = 'IDR', unit = 'gr') {
+  const price = formatCurrency(value, currency);
+  if (price === unavailableLabel) return price;
+
+  const normalizedUnit = String(unit || '').trim().toLowerCase();
+  return normalizedUnit ? `${price}/${normalizedUnit}` : price;
+}
+
 export function formatWeight(weight, unit = '') {
   const numericWeight = Number(weight);
   if (!Number.isFinite(numericWeight)) return '—';

@@ -1,6 +1,6 @@
 # Harga Emas Brankas LM
 
-Mobile-first gold price dashboard built with vanilla JavaScript, Vite, and Tailwind CSS v4.
+Compact, mobile-first gold price dashboard built with vanilla JavaScript, Vite, and Tailwind CSS v4. The UI is price-first: both Brankas LM products are shown side-by-side on mobile with compact per-gram pricing and simple product icons.
 
 ## Data source
 
@@ -59,7 +59,8 @@ After that, each push to `main` automatically runs tests, builds the Vite app, a
 │   └── style.css
 ├── tests/
 │   ├── data.test.js
-│   └── formatters.test.js
+│   ├── formatters.test.js
+│   └── ui.test.js
 ├── package.json
 └── vite.config.js
 ```

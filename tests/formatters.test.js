@@ -27,3 +27,13 @@ test('formatRecordedDate formats YYYY-MM-DD without timezone shifting', () => {
 test('formatTimestampWIB converts API UTC timestamp to Asia/Jakarta time', () => {
   assert.equal(formatTimestampWIB('2026-09-17T03:48:33.894Z'), '17 Sep 2026, 10.48 WIB');
 });
+
+test('formatPricePerUnit renders a compact rupiah per gram price', async () => {
+  const { formatPricePerUnit } = await import('../src/formatters.js');
+  assert.equal(formatPricePerUnit(2598000, 'IDR', 'gr'), 'Rp 2.598.000/gr');
+});
+
+test('formatPricePerUnit preserves unavailable values without a unit suffix', async () => {
+  const { formatPricePerUnit } = await import('../src/formatters.js');
+  assert.equal(formatPricePerUnit(null, 'IDR', 'gr'), 'Belum tersedia');
+});

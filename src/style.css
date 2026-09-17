@@ -3,25 +3,21 @@
 @theme {
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  --color-canvas: #f7f4ec;
-  --color-panel: #fdfbf6;
-  --color-ink: #1b1915;
-  --color-ink-soft: #312e28;
-  --color-muted: #706b61;
-  --color-line: #e4ded1;
+  --color-canvas: #f5f6f8;
+  --color-ink: #1d1f23;
+  --color-muted: #777b83;
+  --color-line: #e5e7eb;
 
-  --color-gold-50: #fff9e9;
-  --color-gold-100: #fdf0c9;
-  --color-gold-200: #f5dd9a;
-  --color-gold-300: #e9c667;
-  --color-gold-400: #d8ac3c;
-  --color-gold-500: #bd8b20;
-  --color-gold-600: #996b17;
-  --color-gold-700: #765015;
-  --color-gold-800: #5f4118;
-  --color-gold-900: #513817;
+  --color-gold-50: #fff8e7;
+  --color-gold-100: #fdf0c8;
+  --color-gold-200: #f5dc98;
+  --color-gold-300: #e8c263;
+  --color-gold-400: #d7a83c;
+  --color-gold-500: #bc891f;
+  --color-gold-600: #9a6d18;
+  --color-gold-700: #775316;
 
-  --shadow-panel: 0 24px 70px -38px rgba(66, 49, 13, 0.34), 0 8px 24px -18px rgba(50, 43, 29, 0.2);
+  --shadow-card: 0 8px 24px -18px rgba(25, 28, 33, 0.32), 0 2px 8px -5px rgba(25, 28, 33, 0.12);
 }
 
 html {
@@ -38,32 +34,16 @@ body {
   color: var(--color-ink);
 }
 
-.page-glow {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 12% -8%, rgba(216, 172, 60, 0.2), transparent 32rem),
-    radial-gradient(circle at 92% 15%, rgba(245, 221, 154, 0.2), transparent 28rem);
-  mask-image: linear-gradient(to bottom, black 0%, transparent 68%);
-}
-
 .price-card {
-  position: relative;
-  overflow: hidden;
+  min-height: 190px;
 }
 
-.price-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--color-gold-300), var(--color-gold-600));
-  opacity: 0.9;
+.compact-price {
+  font-size: clamp(0.84rem, 4.15vw, 1.18rem);
 }
 
 .skeleton-shimmer {
-  background: linear-gradient(90deg, #eee9df 25%, #f8f5ef 50%, #eee9df 75%);
+  background: linear-gradient(90deg, #eceef1 25%, #f7f8f9 50%, #eceef1 75%);
   background-size: 200% 100%;
   animation: shimmer 1.35s infinite linear;
 }
@@ -79,6 +59,12 @@ body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@media (min-width: 640px) {
+  .price-card {
+    min-height: 220px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
