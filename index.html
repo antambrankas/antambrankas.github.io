@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Pantau harga jual emas Brankas LM terbaru dalam tampilan yang ringkas dan mudah dibaca."
+    />
+    <meta name="theme-color" content="#f8f4ea" />
+    <title>Harga Emas Brankas LM</title>
+  </head>
+  <body class="min-h-screen bg-canvas text-ink antialiased">
+    <div class="page-glow" aria-hidden="true"></div>
+
+    <main class="relative mx-auto min-h-screen w-full max-w-6xl px-4 pb-10 pt-5 sm:px-6 sm:pt-7 lg:px-8 lg:pb-14">
+      <header class="flex items-center justify-between gap-4">
+        <a href="/" class="group inline-flex items-center gap-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-4">
+          <span class="grid size-10 place-items-center rounded-xl border border-gold-300/70 bg-white/75 shadow-sm backdrop-blur">
+            <svg viewBox="0 0 24 24" class="size-5 text-gold-700" aria-hidden="true">
+              <path fill="currentColor" d="M7.2 5.25h9.6l3.45 5.1-8.25 8.4-8.25-8.4 3.45-5.1Zm1.07 1.8-1.83 2.7h3.3l1.15-2.7H8.27Zm4.69 0 1.15 2.7h3.45l-1.83-2.7h-2.77Zm-1.05.76-.83 1.94h1.66l-.83-1.94Zm-5.24 3.74 3.42 3.48-1.48-3.48H6.67Zm3.9 0L12 14.93l1.43-3.38h-2.86Zm4.82 0-1.48 3.48 3.42-3.48h-1.94Z"/>
+            </svg>
+          </span>
+          <span>
+            <span class="block text-sm font-semibold tracking-tight text-ink">Harga Emas</span>
+            <span class="block text-xs text-muted">Brankas LM</span>
+          </span>
+        </a>
+
+        <div id="connectionBadge" class="inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-3 py-1.5 text-xs font-medium text-muted shadow-sm backdrop-blur">
+          <span id="connectionDot" class="size-2 rounded-full bg-slate-300"></span>
+          <span id="connectionText">Memuat data</span>
+        </div>
+      </header>
+
+      <section class="pb-8 pt-12 sm:pb-10 sm:pt-16 lg:pt-20">
+        <div class="max-w-3xl">
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-gold-200 bg-gold-50/80 px-3 py-1.5 text-xs font-semibold text-gold-800">
+            <svg viewBox="0 0 24 24" class="size-3.5" aria-hidden="true"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v1.08A8.001 8.001 0 0 1 19.92 11H21a1 1 0 1 1 0 2h-1.08A8.001 8.001 0 0 1 13 19.92V21a1 1 0 1 1-2 0v-1.08A8.001 8.001 0 0 1 4.08 13H3a1 1 0 1 1 0-2h1.08A8.001 8.001 0 0 1 11 4.08V3a1 1 0 0 1 1-1Zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></svg>
+            Harga terkini dari sumber pihak ketiga
+          </div>
+          <h1 class="max-w-2xl text-balance text-4xl font-semibold tracking-[-0.04em] text-ink sm:text-5xl lg:text-6xl">
+            Harga emas, dibuat lebih mudah dibaca.
+          </h1>
+          <p class="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted sm:text-lg">
+            Pantau harga jual Brankas LM dengan tampilan yang ringkas, jelas, dan nyaman di perangkat apa pun.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="price-heading" class="rounded-[1.75rem] border border-line bg-panel/90 p-3 shadow-panel backdrop-blur sm:p-5 lg:p-6">
+        <div class="flex flex-col gap-4 px-1 pb-4 sm:flex-row sm:items-end sm:justify-between sm:px-2 sm:pb-5">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gold-700">Harga jual</p>
+            <h2 id="price-heading" class="mt-1 text-xl font-semibold tracking-tight text-ink sm:text-2xl">Brankas LM hari ini</h2>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-muted sm:justify-end">
+            <svg viewBox="0 0 24 24" class="size-4 shrink-0" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 10.414 2.293 2.293-1.414 1.414L11 13.243V7h2Z"/></svg>
+            <span id="lastUpdated">Menunggu pembaruan…</span>
+          </div>
+        </div>
+
+        <div id="statusRegion" class="sr-only" role="status" aria-live="polite"></div>
+
+        <div id="priceGrid" class="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2" aria-busy="true"></div>
+
+        <div class="mt-4 flex flex-col gap-3 border-t border-line px-1 pt-4 sm:mt-5 sm:flex-row sm:items-center sm:justify-between sm:px-2 sm:pt-5">
+          <div class="min-w-0 text-xs leading-5 text-muted">
+            <span>Data: </span>
+            <a
+              id="sourceLink"
+              href="https://brankaslm.com"
+              target="_blank"
+              rel="noreferrer"
+              class="font-medium text-ink underline decoration-line underline-offset-4 transition hover:decoration-gold-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500"
+            >Brankas LM</a>
+            <span> melalui API pihak ketiga.</span>
+          </div>
+
+          <button
+            id="refreshButton"
+            type="button"
+            class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-ink-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60"
+          >
+            <svg id="refreshIcon" viewBox="0 0 24 24" class="size-4" aria-hidden="true"><path fill="currentColor" d="M17.65 6.35A8 8 0 1 0 20 12h-2a6 6 0 1 1-1.76-4.24L13 11h8V3l-3.35 3.35Z"/></svg>
+            <span id="refreshText">Perbarui harga</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="mt-5 grid gap-3 sm:grid-cols-3" aria-label="Informasi data">
+        <article class="rounded-2xl border border-line/80 bg-white/55 p-4 backdrop-blur">
+          <p class="text-xs font-medium text-muted">Sumber</p>
+          <p id="summarySource" class="mt-1.5 text-sm font-semibold text-ink">Brankas LM</p>
+        </article>
+        <article class="rounded-2xl border border-line/80 bg-white/55 p-4 backdrop-blur">
+          <p class="text-xs font-medium text-muted">Tanggal harga</p>
+          <p id="summaryDate" class="mt-1.5 text-sm font-semibold text-ink">—</p>
+        </article>
+        <article class="rounded-2xl border border-line/80 bg-white/55 p-4 backdrop-blur">
+          <p class="text-xs font-medium text-muted">Status respons</p>
+          <p id="summaryCache" class="mt-1.5 text-sm font-semibold text-ink">Memuat…</p>
+        </article>
+      </section>
+
+      <footer class="mt-8 flex flex-col gap-2 border-t border-line py-6 text-xs leading-5 text-muted sm:flex-row sm:items-start sm:justify-between">
+        <p class="max-w-2xl">
+          Informasi ini bersifat referensi. Situs ini bukan situs resmi ANTAM atau Brankas LM dan tidak berafiliasi dengan penyedia data.
+        </p>
+        <p class="shrink-0">Harga dapat berubah sewaktu-waktu.</p>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
