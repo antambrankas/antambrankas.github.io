@@ -1,16 +1,16 @@
-import './style.css';
+import "./style.css";
 
-import { fetchGoldPrices } from './data.js';
-import { formatPricePerUnit, formatTimestampWIB } from './formatters.js';
+import { fetchGoldPrices } from "./data.js";
+import { formatPricePerUnit, formatTimestampWIB } from "./formatters.js";
 
 const elements = {
-  priceGrid: document.querySelector('#priceGrid'),
-  statusRegion: document.querySelector('#statusRegion'),
-  lastUpdated: document.querySelector('#lastUpdated'),
-  refreshButton: document.querySelector('#refreshButton'),
-  refreshIcon: document.querySelector('#refreshIcon'),
-  refreshText: document.querySelector('#refreshText'),
-  sourceLink: document.querySelector('#sourceLink'),
+  priceGrid: document.querySelector("#priceGrid"),
+  statusRegion: document.querySelector("#statusRegion"),
+  lastUpdated: document.querySelector("#lastUpdated"),
+  refreshButton: document.querySelector("#refreshButton"),
+  refreshIcon: document.querySelector("#refreshIcon"),
+  refreshText: document.querySelector("#refreshText"),
+  sourceLink: document.querySelector("#sourceLink"),
 };
 
 function createElement(tag, className, text) {
@@ -22,11 +22,11 @@ function createElement(tag, className, text) {
 
 function createProductIcon(item) {
   const icon = createElement(
-    'div',
-    'grid size-14 place-items-center rounded-2xl bg-gold-50 text-gold-600 sm:size-16',
+    "div",
+    "grid size-14 place-items-center rounded-2xl bg-gold-50 text-gold-600 sm:size-16",
   );
 
-  const isBrankas = String(item.materialType).toLowerCase().includes('brankas');
+  const isBrankas = String(item.materialType).toLowerCase().includes("brankas");
 
   icon.innerHTML = isBrankas
     ? `<svg viewBox="0 0 64 64" class="size-10 sm:size-11" aria-hidden="true">
@@ -50,39 +50,51 @@ function createProductIcon(item) {
 
 function renderLoading() {
   elements.priceGrid.replaceChildren();
-  elements.priceGrid.setAttribute('aria-busy', 'true');
+  elements.priceGrid.setAttribute("aria-busy", "true");
 
   for (let index = 0; index < 2; index += 1) {
-    const card = createElement('div', 'rounded-2xl border border-line bg-white p-3.5 shadow-card sm:p-5');
-    card.setAttribute('aria-hidden', 'true');
+    const card = createElement(
+      "div",
+      "rounded-2xl border border-line bg-white p-3.5 shadow-card sm:p-5",
+    );
+    card.setAttribute("aria-hidden", "true");
 
-    const icon = createElement('div', 'skeleton-shimmer size-14 rounded-2xl sm:size-16');
-    const title = createElement('div', 'skeleton-shimmer mt-5 h-4 w-3/4 rounded-full');
-    const price = createElement('div', 'skeleton-shimmer mt-4 h-5 w-full rounded-md');
+    const icon = createElement(
+      "div",
+      "skeleton-shimmer size-14 rounded-2xl sm:size-16",
+    );
+    const title = createElement(
+      "div",
+      "skeleton-shimmer mt-5 h-4 w-3/4 rounded-full",
+    );
+    const price = createElement(
+      "div",
+      "skeleton-shimmer mt-4 h-5 w-full rounded-md",
+    );
     card.append(icon, title, price);
     elements.priceGrid.append(card);
   }
 
   setRefreshState(true);
-  elements.lastUpdated.textContent = 'Mengambil harga terbaru…';
-  elements.statusRegion.textContent = 'Sedang mengambil harga emas terbaru.';
+  elements.lastUpdated.textContent = "Mengambil harga terbaru…";
+  elements.statusRegion.textContent = "Sedang mengambil harga emas terbaru.";
 }
 
 function createPriceCard(item) {
   const card = createElement(
-    'article',
-    'price-card min-w-0 rounded-2xl border border-line bg-white p-3.5 shadow-card sm:p-5',
+    "article",
+    "price-card min-w-0 rounded-2xl border border-line bg-white p-3.5 shadow-card sm:p-5",
   );
 
   const icon = createProductIcon(item);
   const title = createElement(
-    'h2',
-    'mt-5 min-h-10 text-[0.92rem] font-semibold leading-5 tracking-[-0.015em] text-ink sm:min-h-0 sm:text-base',
+    "h2",
+    "mt-5 min-h-10 text-[0.92rem] font-semibold leading-5 tracking-[-0.015em] text-ink sm:min-h-0 sm:text-base",
     item.materialType,
   );
   const price = createElement(
-    'p',
-    'compact-price mt-3 whitespace-nowrap font-bold leading-none tracking-[-0.035em] text-ink',
+    "p",
+    "compact-price mt-3 whitespace-nowrap font-bold leading-none tracking-[-0.035em] text-ink",
     formatPricePerUnit(item.sellPrice, item.currency, item.weightUnit),
   );
 
@@ -92,7 +104,7 @@ function createPriceCard(item) {
 
 function renderSuccess(data) {
   elements.priceGrid.replaceChildren();
-  elements.priceGrid.setAttribute('aria-busy', 'false');
+  elements.priceGrid.setAttribute("aria-busy", "false");
 
   if (data.items.length === 0) {
     renderEmpty();
@@ -117,49 +129,75 @@ function renderSuccess(data) {
 
 function renderEmpty() {
   const wrapper = createElement(
-    'div',
-    'col-span-2 rounded-2xl border border-dashed border-line bg-white px-5 py-8 text-center shadow-card',
+    "div",
+    "col-span-2 rounded-2xl border border-dashed border-line bg-white px-5 py-8 text-center shadow-card",
   );
-  const title = createElement('h2', 'text-sm font-semibold text-ink', 'Harga belum tersedia');
-  const copy = createElement('p', 'mt-1.5 text-xs leading-5 text-muted', 'Coba perbarui kembali beberapa saat lagi.');
+  const title = createElement(
+    "h2",
+    "text-sm font-semibold text-ink",
+    "Harga belum tersedia",
+  );
+  const copy = createElement(
+    "p",
+    "mt-1.5 text-xs leading-5 text-muted",
+    "Coba perbarui kembali beberapa saat lagi.",
+  );
   wrapper.append(title, copy);
   elements.priceGrid.append(wrapper);
-  elements.priceGrid.setAttribute('aria-busy', 'false');
+  elements.priceGrid.setAttribute("aria-busy", "false");
   setRefreshState(false);
-  elements.lastUpdated.textContent = 'Belum ada data harga';
-  elements.statusRegion.textContent = 'Belum ada data harga emas yang tersedia.';
+  elements.lastUpdated.textContent = "Belum ada data harga";
+  elements.statusRegion.textContent =
+    "Belum ada data harga emas yang tersedia.";
 }
 
 function renderError(error) {
   elements.priceGrid.replaceChildren();
-  elements.priceGrid.setAttribute('aria-busy', 'false');
+  elements.priceGrid.setAttribute("aria-busy", "false");
 
   const wrapper = createElement(
-    'div',
-    'col-span-2 rounded-2xl border border-red-200 bg-red-50 px-5 py-7 text-center',
+    "div",
+    "col-span-2 rounded-2xl border border-red-200 bg-red-50 px-5 py-7 text-center",
   );
-  const title = createElement('h2', 'text-sm font-semibold text-red-950', 'Harga belum dapat dimuat');
-  const copy = createElement('p', 'mt-1.5 text-xs leading-5 text-red-800/80', 'Periksa koneksi lalu tekan tombol perbarui.');
+  const title = createElement(
+    "h2",
+    "text-sm font-semibold text-red-950",
+    "Harga belum dapat dimuat",
+  );
+  const copy = createElement(
+    "p",
+    "mt-1.5 text-xs leading-5 text-red-800/80",
+    "Periksa koneksi lalu tekan tombol perbarui.",
+  );
   wrapper.append(title, copy);
   elements.priceGrid.append(wrapper);
 
-  elements.lastUpdated.textContent = 'Pembaruan gagal';
+  elements.lastUpdated.textContent = "Pembaruan gagal";
   setRefreshState(false);
-  elements.statusRegion.textContent = `Gagal mengambil data harga emas. ${error?.message || ''}`.trim();
+  elements.statusRegion.textContent =
+    `Gagal mengambil data harga emas. ${error?.message || ""}`.trim();
 }
 
 function setRefreshState(isLoading) {
   elements.refreshButton.disabled = isLoading;
-  elements.refreshButton.setAttribute('aria-label', isLoading ? 'Sedang memperbarui harga' : 'Perbarui harga');
-  elements.refreshText.textContent = isLoading ? 'Memperbarui harga' : 'Perbarui harga';
-  elements.refreshIcon.classList.toggle('is-spinning', isLoading);
+  elements.refreshButton.setAttribute(
+    "aria-label",
+    isLoading ? "Sedang memperbarui harga" : "Perbarui harga",
+  );
+  elements.refreshText.textContent = isLoading
+    ? "Memperbarui harga"
+    : "Perbarui harga";
+  elements.refreshIcon.classList.toggle("is-spinning", isLoading);
 }
 
-async function loadPrices() {
+async function loadPrices({ forceRefresh = false } = {}) {
   renderLoading();
 
   try {
-    const data = await fetchGoldPrices();
+    const data = await fetchGoldPrices(fetch, {
+      forceRefresh,
+    });
+
     renderSuccess(data);
   } catch (error) {
     console.error(error);
@@ -167,6 +205,23 @@ async function loadPrices() {
   }
 }
 
-elements.refreshButton.addEventListener('click', loadPrices);
+/*
+ * Manual refresh should always get latest data
+ * from the API.
+ */
+elements.refreshButton.addEventListener("click", () => {
+  loadPrices({
+    forceRefresh: true,
+  });
+});
 
+/*
+ * Initial page load.
+ *
+ * This will use cached data when:
+ * - cache exists
+ * - cache age <= 5 minutes
+ *
+ * Otherwise it will call the API.
+ */
 loadPrices();
